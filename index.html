@@ -1,0 +1,139 @@
+<html>
+<head>
+    <style>
+    p {
+        font-size: 18px;
+        font-style: italic;
+    }
+    h2 {
+        font-size: 25;
+    }
+    body {
+        background-color: azure;
+    }
+    </style>
+
+    <title>Amicable Calculator</title>
+    <h1><strong>Amicable Calculator</strong><h1>
+    <h2> <u>Enter Your Numbers!</u>: <h2>
+
+
+
+</head>
+<body style = "font-size: 30px;">
+
+    <p> Two Separate Numbers </p>
+    <form id = "amicable" action="/action_page.php">
+        Number 1: <input type="number" name="number_1"><br>
+        Number 2: <input type="number" name="number_2"><br><br>
+        <input type="button" onclick="display()" value="Submit">
+    </form>
+
+    <p> Number 1: </p>
+    <p id="number1"></p>
+    <p> Number 2: </p>
+    <p id="number2"></p>
+    <p id="result"></p>
+    <p id="test"></p>
+
+<script language = "javascript">
+
+    function display() {
+        var num_1;
+        var num_2;
+        var i;
+        var input = document.getElementById("amicable");
+        var in_arr = new Array();
+
+        for (i = 0; i < input.length - 1; ++i) {
+            in_arr.push(input.elements[i].value);
+        }
+
+        num_1 = in_arr[0];
+        num_2 = in_arr[1];
+
+        document.getElementById("number1").innerHTML = num_1;
+        document.getElementById("number2").innerHTML = num_2;
+
+        var factors_1 = getFactors(num_1);
+        var factors_2 = getFactors(num_2);
+        var sum_1 = addFactors(factors_1);
+        var sum_2 = addFactors(factors_2);
+
+        if (sum_1 == num_2 && sum_2 == num_1) {
+            document.getElementById("result").innerHTML = "The numbers are amicable!";
+        } else {
+            document.getElementById("result").innerHTML = "The numbers are NOT amicable!";
+        }
+
+    }
+
+    function isFactor(num, test_num) {
+        var mod_result = num % test_num;
+        
+        if (mod_result == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+// TEST CODE FOR isFactor
+    // var num = 6;
+    // var test_num = 3;
+    // if (isFactor(num, test_num)) {
+    //     document.getElementById("test").innerHTML = test_num + " is a factor of " + num;
+    // }
+    // var num = 8;
+    // var test_num = 4;
+    // if (isFactor(num, test_num)) {
+    //     document.getElementById("test").innerHTML = test_num + " is a factor of " + num;
+    // }
+    // var num = 10;
+    // var test_num = 3;
+    // if (isFactor(num, test_num)) {
+    //     document.getElementById("test").innerHTML = test_num + " is a factor of " + num;
+    // }
+
+    function showFactors(arr) {
+        var i;
+        var contents = "";
+        for (i = 0; i < arr.length; ++i) {
+            contents += arr[i] + " ";
+        }
+        document.getElementById("test").innerHTML = contents;
+    }
+// TEST CODE FOR showFactors
+    // var arr = new Array();
+    // arr.push(1, 2, 3, 4, 5, 6);
+    // showFactors(arr);
+
+    function addFactors(arr) {
+        var sum = 0;
+        for (i = 0; i < arr.length; ++i) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+// TEST CODE FOR addFactors
+    // var arr = new Array();
+    // arr.push(1, 2, 3, 4, 5);
+    // sum = addFactors(arr);
+    // document.getElementById("test").innerHTML = sum;
+
+    function getFactors(num) {
+        var arr = new Array();
+        var i;
+        for (i = 0; i < num; ++i) {
+            if (isFactor(num, i)) {
+                arr.push(i);
+            }
+        }
+        return arr;
+    }
+// TEST CODE FOR getFactors
+    // arr = getFactors(32);
+    // showFactors(arr);
+
+</script>
+</body>
+</html>
